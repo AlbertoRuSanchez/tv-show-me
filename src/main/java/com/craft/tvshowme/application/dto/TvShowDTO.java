@@ -15,5 +15,6 @@ public class TvShowDTO {
 
     private Long id;
     private String name;
+    private Float voteAverage;
 
 }

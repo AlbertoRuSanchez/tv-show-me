@@ -1,8 +1,8 @@
-package com.craft.tvshowme.domain.ports;
+package com.craft.tvshowme.domain.ports.in;
 
 import com.craft.tvshowme.domain.model.TvShows;
 
 public interface TvShowQueryService {
-    TvShows getTvShows();
+    TvShows getTvShows(String page);
 
 }

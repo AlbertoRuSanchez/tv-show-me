@@ -1,10 +1,12 @@
 package com.craft.tvshowme.application;
 
+import com.craft.tvshowme.application.adapters.TvShowRestController;
 import com.craft.tvshowme.application.dto.TvShowDTO;
 import com.craft.tvshowme.application.dto.TvShowsDTO;
 import com.craft.tvshowme.domain.model.TvShow;
 import com.craft.tvshowme.domain.model.TvShows;
-import com.craft.tvshowme.domain.ports.TvShowQueryService;
+import com.craft.tvshowme.domain.ports.in.TvShowQueryService;
+import com.craft.tvshowme.utils.TestingUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,9 +29,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(TvShowRestController.class)
-public class TvShowRestControllerTest {
+public class TvShowRestControllerTest extends TestingUtils {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private static final String PAGE_1 = "1";
 
     @Autowired
     private MockMvc mockMvc;
@@ -47,13 +50,14 @@ public class TvShowRestControllerTest {
         TvShows tvShows = mockTvShows();
         TvShowsDTO tvShowsDTO = mockTvShowsDTO();
         String responseValue = OBJECT_MAPPER.writeValueAsString(tvShowsDTO);
-        given(tvShowQueryService.getTvShows()).willReturn(tvShows);
+        given(tvShowQueryService.getTvShows(PAGE_1)).willReturn(tvShows);
         given(modelMapper.map(tvShows, TvShowsDTO.class)).willReturn(tvShowsDTO);
 
         //When
         ResultActions resultsActions = mockMvc.perform(
                 MockMvcRequestBuilders.get("/api/v1/tv-show")
-                        .accept(MediaType.parseMediaType("application/json;charset=UTF-8")));
+                        .accept(MediaType.parseMediaType("application/json;charset=UTF-8"))
+                        .param("page", "1"));
 
         //Then
         resultsActions
@@ -61,20 +65,6 @@ public class TvShowRestControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(responseValue));
 
-    }
-
-    private TvShows mockTvShows() {
-        List<TvShow> tvShowList = List.of(TvShow.builder().id(1L).name("Breaking bad").build(), TvShow.builder().id(2L).name("Mr.Robot").build());
-        TvShows tvShows = new TvShows();
-        tvShows.setTvShows(tvShowList);
-        return tvShows;
-    }
-
-    private TvShowsDTO mockTvShowsDTO() {
-        List<TvShowDTO> tvShowList = List.of(TvShowDTO.builder().id(1L).name("Breaking bad").build(), TvShowDTO.builder().id(2L).name("Mr.Robot").build());
-        TvShowsDTO tvShows = new TvShowsDTO();
-        tvShows.setTvShows(tvShowList);
-        return tvShows;
     }
 
 }

@@ -12,5 +12,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class TvShows {
+    private Integer page;
+    private Integer totalPages;
+    private Integer totalTvShows;
     private List<TvShow> tvShows;
 }

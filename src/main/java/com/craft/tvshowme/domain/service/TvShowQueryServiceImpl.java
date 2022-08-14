@@ -1,22 +1,27 @@
 package com.craft.tvshowme.domain.service;
 
-import com.craft.tvshowme.domain.model.TvShow;
+import com.craft.tvshowme.domain.error.TvShowsNotFoundException;
 import com.craft.tvshowme.domain.model.TvShows;
-import com.craft.tvshowme.domain.ports.TvShowQueryService;
+import com.craft.tvshowme.domain.ports.in.TvShowQueryService;
+import com.craft.tvshowme.domain.ports.out.TvShowRepository;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+import java.util.Optional;
 
 public class TvShowQueryServiceImpl implements TvShowQueryService {
 
-    public TvShowQueryServiceImpl() {
+    private final TvShowRepository tvShowRepository;
+
+    public TvShowQueryServiceImpl(TvShowRepository tvShowRepository) {
+        this.tvShowRepository = tvShowRepository;
     }
 
     @Override
-    public TvShows getTvShows() {
-        List<TvShow> tvShowList = List.of(TvShow.builder().id(1L).name("Breaking bad").build(), TvShow.builder().id(2L).name("Mr.Robot").build());
-        TvShows tvShows = new TvShows();
-        tvShows.setTvShows(tvShowList);
-        return tvShows;
+    public TvShows getTvShows(String page) {
+        Optional<TvShows> tvShows = tvShowRepository.getTvShows(page);
+        if(tvShows.isEmpty()){
+            throw new TvShowsNotFoundException();
+        }
+        return tvShows.get();
     }
 }
