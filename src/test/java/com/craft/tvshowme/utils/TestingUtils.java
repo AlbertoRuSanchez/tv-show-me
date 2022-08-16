@@ -1,5 +1,6 @@
 package com.craft.tvshowme.utils;
 
+import com.craft.tvshowme.application.dto.GenreDTO;
 import com.craft.tvshowme.application.dto.TvShowDTO;
 import com.craft.tvshowme.application.dto.TvShowsDTO;
 import com.craft.tvshowme.domain.model.Genre;
@@ -7,6 +8,7 @@ import com.craft.tvshowme.domain.model.TvShow;
 import com.craft.tvshowme.domain.model.TvShows;
 import com.craft.tvshowme.infrastructure.adapters.clients.tmdb.dto.TMdBTvShowsPageResponse;
 import com.craft.tvshowme.infrastructure.adapters.clients.tmdb.dto.TMdBTvShowResponse;
+import com.craft.tvshowme.infrastructure.adapters.clients.tmdb.dto.TmdbGenre;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,35 @@ public class TestingUtils {
         TvShowsDTO tvShows = new TvShowsDTO();
         tvShows.setTvShows(tvShowList);
         return tvShows;
+    }
+
+    protected TvShowDTO mockTvShowDTODetailed(){
+        TvShowDTO tvShowDTO = new TvShowDTO();
+
+        tvShowDTO.setId(1L);
+        tvShowDTO.setName("Arcane");
+        tvShowDTO.setVoteAverage(9.65);
+        tvShowDTO.setPoster("/wwemzKWzjKYJFfCeiB57q3r4Bcm.png");
+        tvShowDTO.setGenres(List.of(GenreDTO.ANIMATION, GenreDTO.ACTION_AND_ADVENTURE));
+        tvShowDTO.setNumberOfSeasons(2);
+        tvShowDTO.setNumberOfEpisodes(20);
+        tvShowDTO.setOverview("mid the stark discord of twin cities Piltover and Zaun, two sisters fight on rival sides " +
+                "of a war between magic technologies and clashing convictions.");
+        return tvShowDTO;
+    }
+
+    protected TvShow mockTvShowDetailed(){
+        TvShow tvShow = new TvShow();
+        tvShow.setId(1L);
+        tvShow.setName("Arcane");
+        tvShow.setVoteAverage(9.65);
+        tvShow.setPoster("/wwemzKWzjKYJFfCeiB57q3r4Bcm.png");
+        tvShow.setGenres(List.of(Genre.ANIMATION, Genre.ACTION_AND_ADVENTURE));
+        tvShow.setNumberOfSeasons(2);
+        tvShow.setNumberOfEpisodes(20);
+        tvShow.setOverview("mid the stark discord of twin cities Piltover and Zaun, two sisters fight on rival sides " +
+                "of a war between magic technologies and clashing convictions.");
+        return tvShow;
     }
 
     protected TMdBTvShowsPageResponse mockTMDdBTvShowsPageResponse() {
@@ -60,6 +91,23 @@ public class TestingUtils {
 
         TMdBTvShowsPageResponse.setResults(tMdBTvShowResponses);
         return TMdBTvShowsPageResponse;
+    }
+
+    protected TMdBTvShowResponse mockTMdBShowResponse(){
+
+        TMdBTvShowResponse tMdBTvShowResponse = new TMdBTvShowResponse();
+
+        tMdBTvShowResponse.setId(3L);
+        tMdBTvShowResponse.setName("Rings of power");
+        tMdBTvShowResponse.setVoteAverage(9.1);
+        tMdBTvShowResponse.setPosterPath("/oKIBhzZzDX07SoE2bOLhq2EE8rf.jpg");
+        tMdBTvShowResponse.setGenres(List.of(new TmdbGenre(16), new TmdbGenre(9648)));
+        tMdBTvShowResponse.setOverview("Any text");
+        tMdBTvShowResponse.setPopularity(9.6);
+        tMdBTvShowResponse.setNumberOfEpisodes(50);
+        tMdBTvShowResponse.setNumberOfSeasons(5);
+
+        return tMdBTvShowResponse;
     }
 
     protected List<Genre> mockListOfGenres(){

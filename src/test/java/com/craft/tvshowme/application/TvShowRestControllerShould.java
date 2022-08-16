@@ -1,7 +1,9 @@
 package com.craft.tvshowme.application;
 
 import com.craft.tvshowme.application.adapters.TvShowRestController;
+import com.craft.tvshowme.application.dto.TvShowDTO;
 import com.craft.tvshowme.application.dto.TvShowsDTO;
+import com.craft.tvshowme.domain.model.TvShow;
 import com.craft.tvshowme.domain.model.TvShows;
 import com.craft.tvshowme.domain.ports.in.TvShowQueryService;
 import com.craft.tvshowme.utils.TestingUtils;
@@ -18,6 +20,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -52,7 +56,7 @@ public class TvShowRestControllerShould extends TestingUtils {
         //When
         ResultActions resultsActions = mockMvc.perform(
                 MockMvcRequestBuilders.get("/api/v1/tv-show/top-rated")
-                        .accept(MediaType.parseMediaType("application/json;charset=UTF-8"))
+                        .accept(MediaType.APPLICATION_JSON)
                         .param("page", "1"));
 
         //Then
@@ -63,4 +67,21 @@ public class TvShowRestControllerShould extends TestingUtils {
 
     }
 
+    @Test
+    void return_details_from_a_tv_show() throws Exception {
+        //Given
+        TvShowDTO tvShowDTO = mockTvShowDTODetailed();
+        TvShow tvShow = mockTvShowDetailed();
+        given(tvShowQueryService.getTvShow(anyInt())).willReturn(tvShow);
+        given(modelMapper.map(tvShow, TvShowDTO.class)).willReturn(tvShowDTO);
+
+        //When
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/tv-show/{id}", 94605)
+                .accept(MediaType.APPLICATION_JSON));
+
+        //Then
+        resultActions.andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json(OBJECT_MAPPER.writeValueAsString(tvShowDTO)));
+    }
 }

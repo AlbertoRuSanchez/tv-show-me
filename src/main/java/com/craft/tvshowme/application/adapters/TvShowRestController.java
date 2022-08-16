@@ -1,6 +1,7 @@
 package com.craft.tvshowme.application.adapters;
 
 
+import com.craft.tvshowme.application.dto.TvShowDTO;
 import com.craft.tvshowme.application.dto.TvShowsDTO;
 import com.craft.tvshowme.domain.ports.in.TvShowQueryService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +29,12 @@ public class TvShowRestController {
     @Operation(description = "Get a page from top-rated tv-shows list")
     public ResponseEntity<TvShowsDTO> getTvShows(@RequestParam String page){
         return ResponseEntity.ok(modelMapper.map(tvShowQueryService.getTopRatedTvShows(page), TvShowsDTO.class));
+    }
+
+    @GetMapping("/{id}")
+    @Operation(description = "Get detailed tv show searched by id")
+    public ResponseEntity<TvShowDTO> getTvShow(@PathVariable Integer id){
+        return ResponseEntity.ok(modelMapper.map(tvShowQueryService.getTvShow(id), TvShowDTO.class));
     }
 
 }

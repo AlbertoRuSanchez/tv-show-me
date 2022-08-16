@@ -8,6 +8,7 @@ import com.craft.tvshowme.domain.service.TvShowQueryServiceImpl;
 import com.craft.tvshowme.infrastructure.adapters.TvShowRepositoryTMdB;
 import com.craft.tvshowme.infrastructure.adapters.clients.tmdb.TMdBFeignClient;
 import com.craft.tvshowme.infrastructure.adapters.clients.tmdb.configuration.TMdBFeignClientConfiguration;
+import com.craft.tvshowme.infrastructure.adapters.clients.tmdb.converter.TMdBTvShowResponseToTvShowConverter;
 import com.craft.tvshowme.infrastructure.adapters.clients.tmdb.converter.TMdBTvShowsPageResponseToTvShowsConverter;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -24,12 +25,14 @@ public class BeanConfiguration {
     @Bean
     public TvShowRepository getTvShowRepository(TMdBFeignClient tMdBClient,
                                                 TMdBFeignClientConfiguration tMdBFeignClientConfiguration,
-                                                TMdBTvShowsPageResponseToTvShowsConverter converter) {
-        return new TvShowRepositoryTMdB(tMdBClient, tMdBFeignClientConfiguration, converter);
+                                                TMdBTvShowsPageResponseToTvShowsConverter tMdBTvShowsPageResponseToTvShowsConverter,
+                                                TMdBTvShowResponseToTvShowConverter tMdBTvShowResponseToTvShowConverter) {
+        return new TvShowRepositoryTMdB(tMdBClient, tMdBFeignClientConfiguration, tMdBTvShowsPageResponseToTvShowsConverter,
+                tMdBTvShowResponseToTvShowConverter);
     }
 
     @Bean
-    public GenreService getGenreService(){
+    public GenreService getGenreService() {
         return new GenreServiceImpl();
     }
 

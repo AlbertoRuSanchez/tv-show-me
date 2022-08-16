@@ -21,4 +21,7 @@ public class TvShow {
     private Double popularity;
     private String poster;
     private List<Genre> genres = new ArrayList<>();
+    private Integer numberOfSeasons;
+    private Integer numberOfEpisodes;
+    private String overview;
 }

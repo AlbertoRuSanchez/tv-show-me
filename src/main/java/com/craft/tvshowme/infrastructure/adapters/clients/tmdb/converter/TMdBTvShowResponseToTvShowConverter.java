@@ -38,6 +38,9 @@ public class TMdBTvShowResponseToTvShowConverter implements Converter<TMdBTvShow
             source.getGenres().forEach(tmdbGenre -> genres.add(convertGenreTmdbToGenreDomain(tmdbGenre.getId())));
         }
         tvShow.setGenres(genres);
+        tvShow.setOverview(source.getOverview());
+        tvShow.setNumberOfSeasons(source.getNumberOfSeasons());
+        tvShow.setNumberOfEpisodes(source.getNumberOfEpisodes());
 
         return tvShow;
     }
