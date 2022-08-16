@@ -1,9 +1,7 @@
 package com.craft.tvshowme.application;
 
 import com.craft.tvshowme.application.adapters.TvShowRestController;
-import com.craft.tvshowme.application.dto.TvShowDTO;
 import com.craft.tvshowme.application.dto.TvShowsDTO;
-import com.craft.tvshowme.domain.model.TvShow;
 import com.craft.tvshowme.domain.model.TvShows;
 import com.craft.tvshowme.domain.ports.in.TvShowQueryService;
 import com.craft.tvshowme.utils.TestingUtils;
@@ -20,8 +18,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.List;
-
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -29,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(TvShowRestController.class)
-public class TvShowRestControllerTest extends TestingUtils {
+public class TvShowRestControllerShould extends TestingUtils {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private static final String PAGE_1 = "1";
@@ -44,13 +40,13 @@ public class TvShowRestControllerTest extends TestingUtils {
     private ModelMapper modelMapper;
 
     @Test
-    void should_call_getTvShows_and_return_TvShow_List_and_200_status() throws Exception {
+    void call_getTvShows_and_return_TvShow_List_page_with_200_status() throws Exception {
 
         //Given
         TvShows tvShows = mockTvShows();
         TvShowsDTO tvShowsDTO = mockTvShowsDTO();
         String responseValue = OBJECT_MAPPER.writeValueAsString(tvShowsDTO);
-        given(tvShowQueryService.getTvShows(PAGE_1)).willReturn(tvShows);
+        given(tvShowQueryService.getTopRatedTvShows(PAGE_1)).willReturn(tvShows);
         given(modelMapper.map(tvShows, TvShowsDTO.class)).willReturn(tvShowsDTO);
 
         //When

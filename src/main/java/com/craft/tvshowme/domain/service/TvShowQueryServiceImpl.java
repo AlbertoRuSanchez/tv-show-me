@@ -4,7 +4,6 @@ import com.craft.tvshowme.domain.error.TvShowsNotFoundException;
 import com.craft.tvshowme.domain.model.TvShows;
 import com.craft.tvshowme.domain.ports.in.TvShowQueryService;
 import com.craft.tvshowme.domain.ports.out.TvShowRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
@@ -17,8 +16,8 @@ public class TvShowQueryServiceImpl implements TvShowQueryService {
     }
 
     @Override
-    public TvShows getTvShows(String page) {
-        Optional<TvShows> tvShows = tvShowRepository.getTvShows(page);
+    public TvShows getTopRatedTvShows(String page) {
+        Optional<TvShows> tvShows = tvShowRepository.getTopRatedTvShows(page);
         if(tvShows.isEmpty()){
             throw new TvShowsNotFoundException();
         }

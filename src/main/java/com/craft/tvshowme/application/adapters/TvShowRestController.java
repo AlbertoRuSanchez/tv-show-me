@@ -21,7 +21,7 @@ public class TvShowRestController {
 
     @GetMapping
     public ResponseEntity<TvShowsDTO> getTvShows(@RequestParam String page){
-        return ResponseEntity.ok(modelMapper.map(tvShowQueryService.getTvShows(page), TvShowsDTO.class));
+        return ResponseEntity.ok(modelMapper.map(tvShowQueryService.getTopRatedTvShows(page), TvShowsDTO.class));
     }
 
 }

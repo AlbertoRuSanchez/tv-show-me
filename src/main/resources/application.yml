@@ -1,6 +1,11 @@
 feign:
   client:
-      tmdb:
-        apiKey:
-        url: https://api.themoviedb.org/3
-        language: en-US
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+    tmdb:
+      apiKey:
+      url: https://api.themoviedb.org/3
+      language: en-US

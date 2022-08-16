@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -15,4 +18,7 @@ public class TvShow {
     private Long id;
     private String name;
     private Double voteAverage;
+    private Double popularity;
+    private String poster;
+    private List<Genre> genres = new ArrayList<>();
 }

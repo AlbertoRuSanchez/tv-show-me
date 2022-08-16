@@ -18,7 +18,7 @@ public class TvShowRepositoryTMdB implements TvShowRepository {
     private final TMdBTvShowsPageResponseToTvShowsConverter converter;
 
     @Override
-    public Optional<TvShows> getTvShows(String page) {
+    public Optional<TvShows> getTopRatedTvShows(String page) {
 
         TMdBTvShowsPageResponse tMdBTvShowsPageResponse = tMdBFeignClient.getTopTvShows(tMdBFeignClientConfiguration.getApiKey(),
                 tMdBFeignClientConfiguration.getLanguage(), page);

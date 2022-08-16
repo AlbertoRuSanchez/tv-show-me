@@ -1,20 +1,19 @@
 package com.craft.tvshowme.infrastructure.adapters.clients.tmdb.configuration;
 
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@ConfigurationProperties(prefix = "feign.client.tmdb")
 @Getter
+@Setter
 public class TMdBFeignClientConfiguration {
 
-    @Value("${feign.client.tmdb.apiKey}")
     private String apiKey;
-
-    @Value("${feign.client.tmdb.url}")
     private String url;
-
-    @Value("${feign.client.tmdb.language}")
     private String language;
+    private String urlImages;
 
 }

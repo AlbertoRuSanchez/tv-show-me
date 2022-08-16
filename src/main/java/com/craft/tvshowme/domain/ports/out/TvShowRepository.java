@@ -5,6 +5,6 @@ import com.craft.tvshowme.domain.model.TvShows;
 import java.util.Optional;
 
 public interface TvShowRepository {
-   Optional<TvShows> getTvShows(String page);
+   Optional<TvShows> getTopRatedTvShows(String page);
 
 }

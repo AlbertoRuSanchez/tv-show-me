@@ -1,7 +1,9 @@
 package com.craft.tvshowme.infrastructure.configuration;
 
+import com.craft.tvshowme.domain.ports.in.GenreService;
 import com.craft.tvshowme.domain.ports.in.TvShowQueryService;
 import com.craft.tvshowme.domain.ports.out.TvShowRepository;
+import com.craft.tvshowme.domain.service.GenreServiceImpl;
 import com.craft.tvshowme.domain.service.TvShowQueryServiceImpl;
 import com.craft.tvshowme.infrastructure.adapters.TvShowRepositoryTMdB;
 import com.craft.tvshowme.infrastructure.adapters.clients.tmdb.TMdBFeignClient;
@@ -24,6 +26,11 @@ public class BeanConfiguration {
                                                 TMdBFeignClientConfiguration tMdBFeignClientConfiguration,
                                                 TMdBTvShowsPageResponseToTvShowsConverter converter) {
         return new TvShowRepositoryTMdB(tMdBClient, tMdBFeignClientConfiguration, converter);
+    }
+
+    @Bean
+    public GenreService getGenreService(){
+        return new GenreServiceImpl();
     }
 
     @Bean

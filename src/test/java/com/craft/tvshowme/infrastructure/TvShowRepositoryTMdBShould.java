@@ -18,7 +18,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.MockitoAnnotations.openMocks;
 
-public class TvShowRepositoryTMdBTest extends TestingUtils {
+public class TvShowRepositoryTMdBShould extends TestingUtils {
 
     private static final String API_KEY = "asdddddddd23423rcqwerftq345tf";
     private static final String LANGUAGE_EN = "en-US";
@@ -40,14 +40,14 @@ public class TvShowRepositoryTMdBTest extends TestingUtils {
     }
 
     @Test
-    void should_return_list_of_tv_shows() {
+    void return_a_top_rated_list_of_tv_shows_as_a_TvShows_Optional() {
         //Given
         TMdBTvShowsPageResponse TMdBTvShowsPageResponse = mockTMDdBTvShowsPageResponse();
         TvShows tvShows = mockTvShows();
         given(tMdBFeignClient.getTopTvShows(API_KEY, LANGUAGE_EN, PAGE_1)).willReturn(TMdBTvShowsPageResponse);
         given(converter.convert(any())).willReturn(tvShows);
         //When
-        Optional<TvShows> response = underTest.getTvShows(PAGE_1);
+        Optional<TvShows> response = underTest.getTopRatedTvShows(PAGE_1);
 
         //Then
         assertThat(response).isNotNull();

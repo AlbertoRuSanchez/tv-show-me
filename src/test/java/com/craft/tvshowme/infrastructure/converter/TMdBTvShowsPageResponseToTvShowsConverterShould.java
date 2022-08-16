@@ -1,16 +1,19 @@
 package com.craft.tvshowme.infrastructure.converter;
 
 import com.craft.tvshowme.domain.model.TvShows;
+import com.craft.tvshowme.infrastructure.adapters.clients.tmdb.configuration.TMdBFeignClientConfiguration;
 import com.craft.tvshowme.infrastructure.adapters.clients.tmdb.converter.TMdBTvShowResponseToTvShowConverter;
 import com.craft.tvshowme.infrastructure.adapters.clients.tmdb.converter.TMdBTvShowsPageResponseToTvShowsConverter;
 import com.craft.tvshowme.infrastructure.adapters.clients.tmdb.dto.TMdBTvShowsPageResponse;
 import com.craft.tvshowme.utils.TestingUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TMdBTvShowsPageResponseToTvShowsConverterShould extends TestingUtils {
+
 
     private TMdBTvShowsPageResponseToTvShowsConverter underTest;
 

@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -15,6 +18,9 @@ public class TvShowDTO {
 
     private Long id;
     private String name;
-    private Float voteAverage;
+    private Double voteAverage;
+    private Double popularity;
+    private String poster;
+    private List<GenreDTO> genres = new ArrayList<>();
 
 }
