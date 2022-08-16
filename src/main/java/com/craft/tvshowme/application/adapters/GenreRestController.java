@@ -2,6 +2,8 @@ package com.craft.tvshowme.application.adapters;
 
 import com.craft.tvshowme.application.dto.GenreDTO;
 import com.craft.tvshowme.domain.ports.in.GenreService;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/genre")
 @RequiredArgsConstructor
+@Tag(name = "Genres")
 public class GenreRestController {
 
     private final GenreService genreService;

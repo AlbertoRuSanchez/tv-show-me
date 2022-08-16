@@ -51,7 +51,7 @@ public class TvShowRestControllerShould extends TestingUtils {
 
         //When
         ResultActions resultsActions = mockMvc.perform(
-                MockMvcRequestBuilders.get("/api/v1/tv-show")
+                MockMvcRequestBuilders.get("/api/v1/tv-show/top-rated")
                         .accept(MediaType.parseMediaType("application/json;charset=UTF-8"))
                         .param("page", "1"));
 
